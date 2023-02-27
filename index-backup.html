@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+     <!-- add Font Awesome cdn css stylesheet -->
+     <script src="https://kit.fontawesome.com/4d55a77701.js" crossorigin="anonymous"></script>
+
+     <link rel="stylesheet" href="style.css">
+    <title>ToDo List</title>
+</head>
+<body>
+
+    <div class="card">
+
+        <!-- HEADER -->
+        <div class="card-header">
+            <h1>To Do List</h1>
+        </div>
+
+        <!-- FORMs -->
+        <form id="todoForm">
+                <input type="text" id="todoInput" placeholder="Enter a task">
+                <button type="submit" class="btn-primary" id="add">
+                    <i class="fa-solid fa-circle-plus fa-2xl"></i>
+                </button> 
+        </form>
+
+           <!-- display a list of items -->
+
+         <ul class="list-group" id="items">  
+            <li id="itemTemplate">
+            </li>
+        </ul>
+    </div> 
+    
+</body>
+
+<script>
+
+function toggleButton() {
+  var button = document.getElementById("item-completed");
+  if (button.classList.contains("active")) {
+    button.classList.remove("active");
+  } else {
+    button.classList.add("active");
+  }
+}
+
+function renderList() {
+    // get state of todo list from local storage
+// if there is no state, initialize it as an empty array
+let todoList = JSON.parse(localStorage.getItem("todoList")) || [];
+
+
+// render the todo list
+todoList.forEach(function(item) {
+    let newItemElement = document.createElement("li");
+    newItemElement.classList.add("list-group-item");
+    newItemElement.innerText = item;
+    document.getElementById("items").appendChild(newItemElement);
+});
+
+// when we press the add button, add a new item to the todo list
+// include the item-completed button, then the item-description input, then the remove-item button
+document.getElementById("add").addEventListener("click", function(event) {
+    event.preventDefault();
+
+    // create new li element
+    let newItemElement = document.createElement("li");
+    newItemElement.classList.add("list-group-item");
+
+    // create item-completed button
+    let itemCompletedButton = document.createElement("button");
+    itemCompletedButton.classList.add("item-completed");
+    itemCompletedButton.innerHTML = '<i class="fa-solid fa-circle-check fa-2xl"></i>';
+
+    // add an event listener to the item-completed button
+    itemCompletedButton.addEventListener("click", function(event) {
+        event.preventDefault();
+        if (itemCompletedButton.classList.contains("active")) {
+            itemCompletedButton.classList.remove("active");
+        } else {
+            itemCompletedButton.classList.add("active");
+        }
+    });
+
+    // create item-description input
+    let itemDescriptionInput = document.createElement("input");
+    itemDescriptionInput.classList.add("item-description");
+    itemDescriptionInput.setAttribute("contenteditable", "true");
+    itemDescriptionInput.value = document.getElementById("todoInput").value;
+
+    // add an event listener to the item-description input
+    itemDescriptionInput.addEventListener("input", function(event) {
+            // update the corresponding item in the todoList array
+            let index = Array.from(document.querySelectorAll(".item-description")).indexOf(itemDescriptionInput);
+            todoList[index] = itemDescriptionInput.value;
+
+            // save the updated todoList to local storage
+            localStorage.setItem("todoList", JSON.stringify(todoList));
+        });
+
+    // create remove-item button
+    let removeItemButton = document.createElement("button");
+    removeItemButton.classList.add("remove-item");
+    removeItemButton.innerHTML = '<i class="fa-solid fa-trash fa-2xl"></i>';
+
+    // add an event listener to the remove-item button
+    removeItemButton.addEventListener("click", function(event) {
+        event.preventDefault();
+        newItemElement.remove();
+        todoList.splice(todoList.indexOf(newItemElement.innerText), 1);
+        localStorage.setItem("todoList", JSON.stringify(todoList));
+    });
+
+    // append the item-completed button, item-description input, and remove-item button to the new item
+    newItemElement.appendChild(itemCompletedButton);
+    newItemElement.appendChild(itemDescriptionInput);
+    newItemElement.appendChild(removeItemButton);
+
+    // add the new item to the todo list
+    todoList.push(itemDescriptionInput.value);
+
+    // save the todo list to local storage
+    localStorage.setItem("todoList", JSON.stringify(todoList));
+
+    // append the new item to the todo list
+    document.getElementById("items").appendChild(newItemElement);
+
+    // clear the todoInput field
+    document.getElementById("todoInput").value = "";
+});
+}
+
+// when the page loads, render the todo list
+window.onload = function() {
+    renderList();
+}
+
+
+</script>
+</html>

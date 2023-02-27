@@ -1,0 +1,134 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&:900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&;900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&:900&display=swap');     
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+
+    font-family: 'Montserrat', sans-serif;
+    width: 100vw; 
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    color:  #D4D4D4;
+    background-color: #333333;
+
+}
+
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    /* align-items: center; */
+    /* height: 750px; */
+    width: 500px;
+    /* show border around card */
+    /* border: 1px solid black; */
+    padding: 25px;
+    /* show shadow */
+    box-shadow: 0 0 50px 0 rgba(0,0,0,0.5);
+    border-radius: 15px;
+}
+
+form {
+    display: flex;
+    gap: 10px;  
+    width: 100%;
+}
+
+
+input {
+    width: 90%;
+    padding-left: 10px;
+    padding: 10px;
+    margin: 10px 0;
+    border: 2px solid rgb(87, 87, 87);
+    border-radius: 5px;
+    height: 45px;
+    background-color: #333333;
+}
+
+
+.btn-primary {
+    margin: 10px 0;
+    border: none;
+    background-color: #333333;
+    color:  rgb(87, 87, 87);
+    cursor: pointer;
+}
+
+.btn-danger {
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    background-color: #333333;
+    color:  rgb(87, 87, 87);
+    cursor: pointer;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    height: 45px;
+    /* width: 100%;
+    /* background-color: #333333; */ 
+    color:  rgb(255, 255, 255);
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+    align-items: center;
+}
+
+li.list-group-item {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+    align-items: center;
+}
+
+/* .toggleButton {
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: white;
+    border: 1px solid black;
+} */
+
+.btn-success {
+    /* width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: #333333;
+    border: 2px solid rgb(87, 87, 87);
+    float: right;
+    cursor: pointer; */
+}
+
+
+.btn-success:active {
+    /* background-color: rgb(131, 48, 48);
+} */
