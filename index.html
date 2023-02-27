@@ -138,6 +138,7 @@
     // add event listener to the todoForm
     document.getElementById("todoForm").addEventListener("submit", function(event) {
         event.preventDefault();
+        renderList();
     });
     
     // when the page loads, render the todo list
